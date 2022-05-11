@@ -9,6 +9,60 @@
     <title>融智云考解密版</title>
     <script src="./lib/jQuery.min.js"></script>
     <script src="./js/practice.js"></script>
+    <style type="text/css">
+        @keyframes myloading1{
+        0%{transform: rotate(0deg);opacity: 1}
+        50%{transform: rotate(180deg);opacity: 0.9}
+        100%{transform: rotate(360deg);opacity: 0.1}
+        }
+        
+        @keyframes myloading2{
+        0%{transform: rotate(0deg);opacity: 1}
+        50%{transform: rotate(150deg);opacity: 0.85}
+        100%{transform: rotate(360deg);opacity: 0.1}
+        }
+        @keyframes myloading3{
+        0%{transform: rotate(0deg);opacity: 1}
+        50%{transform: rotate(120deg);opacity: 0.8}
+        100%{transform: rotate(360deg);opacity: 0.1}
+        }
+        @keyframes myloading4{
+        0%{transform: rotate(0deg);opacity: 1}
+        50%{transform: rotate(90deg);opacity: 0.75}
+        100%{transform: rotate(360deg);opacity: 0.1}
+        }
+        @keyframes myloading5{
+        0%{transform: rotate(0deg);opacity: 1}
+        50%{transform: rotate(60deg);opacity: 0.7}
+        100%{transform: rotate(360deg);opacity: 0.1}
+        }
+        @keyframes myloading6{
+        0%{transform: rotate(0deg);opacity: 1}
+        50%{transform: rotate(30deg);opacity: 0.65}
+        100%{transform: rotate(360deg);opacity: 0.1}
+        }
+        .dot-container{
+            transform-origin:left bottom;
+            left:50%;
+            bottom:50%;
+            position:absolute;
+            width:20px;
+            height:20px;
+            animation-direction:normal;
+        }
+        .dot{
+            width:6px;height:6px;border-radius:3px;background:white;
+        }
+        .load {
+            background-color: rgb(179, 179, 179);
+            opacity: 0.3;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
 </body>

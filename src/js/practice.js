@@ -45,8 +45,34 @@ $(function () {
 			data = res.datas
 			createDiv()
 			$('.practice').click(function () {
+				var load = document.createElement('div')
+				load.innerHTML = `<div class="load">
+									<div style="text-align:center;position:absolute;color:white;width:93px;height:93px;">
+										<div style="animation: myloading1 2s linear infinite;" class="dot-container">
+											<div class="dot"></div>
+										</div>
+										<div style="animation: myloading2 2s linear infinite;" class="dot-container">
+											<div class="dot"></div>
+										</div>
+										<div style="animation: myloading3 2s linear infinite;" class="dot-container">
+											<div class="dot"></div>
+										</div>
+										<div style="animation: myloading4 2s linear infinite;" class="dot-container">
+											<div class="dot"></div>
+										</div>
+										<div style="animation: myloading5 2s linear infinite;" class="dot-container">
+											<div class="dot"></div>
+										</div>
+										<div style="animation: myloading6 2s linear infinite;" class="dot-container">
+											<div class="dot"></div>
+										</div>
+									</div>
+								</div>`
+				document.body.appendChild(load)
+				console.log(23);
 				var sub = data[$('.practice').index(this)]
 				console.log(sub);
+				var list = {}
 				$.ajax({
 					url: baseUrl + '/mobile/index.php?act=studentpracticeapi&op=getStudentPractiseQuestionList',
 					type: 'POST',
@@ -64,8 +90,29 @@ $(function () {
 						studentpractisequestioncount: sub.questioncount
 					}
 				}).then(res => {
-					localStorage.setItem('list', JSON.stringify(res.datas.questionlist))
-					location.href = './subject.html'
+					list = res.datas.questionlist
+					$.ajax({
+						url: baseUrl + '/mobile/index.php?act=studentpracticeapi&op=getStudentPractiseQuestionList',
+						type: 'POST',
+						data: {
+							key: localStorage.getItem('key'),
+							courseid: sub.courseid,
+							practiseid: sub.practiseid,
+							studentpractiseid: sub.id,
+							teacherid: sub.teacherid,
+							pagecount: sub.questioncount,
+							pageindex: 1,
+							practisetype: 1,
+							statenum: 0,
+							id: '',
+							studentpractisequestioncount: sub.questioncount
+						}
+					}).then(r => {
+						list.push(...r.datas.questionlist)
+						localStorage.setItem('list', JSON.stringify(list))
+						location.href = './subject.html'
+					})
+
 				})
 			})
 		})
