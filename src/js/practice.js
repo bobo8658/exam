@@ -25,7 +25,8 @@ $(function () {
 	}
 	function createDiv() {
 		var div = document.createElement('div')
-		data.forEach((element, index) => {
+		if (data.length === 0) div.innerHTML += `<h2>暂无题库</h2>`
+		else data.forEach((element, index) => {
 			div.innerHTML += `<div data-id="${index}" class="practice" style="border: 1px solid #5b9bd1;border-radius: 5px;margin-bottom: 10px;padding: 0 20px 15px;cursor:pointer;max-width:500px">
 										<h4 id="name">${element.practicename}</h4>
 										<span id="class">${element.lessonname}</span>
