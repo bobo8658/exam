@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+  <!-- <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script> -->
+  <script src="./lib/jQuery.min.js"></script>
+  <script src="./lib/pako.min.js"></script>
+  <script src="./js/build.js"></script>
+  <script>
+    $(document).ready(() => {
+      const replace = (data) => {
+        $("#subject").html(build(data));
+        $(".question").children("div").addClass("other");
+        $(".question .other:first-child").removeClass("other");
+        $(".other").removeAttr("style");
+      };
+      $.getJSON('./list.json', (data) => replace(data));
+    });
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .item {
+      margin-bottom: 10px;
+    }
+
+    .num {
+      /* top: 10px; */
+      font-size: 19px;
+      border: 1px dashed aquamarine;
+      border-bottom: 0;
+    }
+
+    .question,
+    .answer {
+      border: 1px dashed aquamarine;
+      border-top: 0;
+      padding-left: 25px;
+    }
+
+    .question>.other {
+      display: inline-block;
+      max-width: 33%;
+    }
+
+    .question>.other img {
+      display: block;
+      width: 100%;
+      object-fit: scale-down;
+    }
+
+    .answer {
+      position: relative;
+      border-color: brown;
+      min-height: 24px;
+    }
+
+    .answer::before {
+      content: "解：";
+      position: absolute;
+      left: 0;
+      font-size: 17px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="subject"></div>
+</body>
+
+</html>

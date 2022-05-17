@@ -1,20 +1,18 @@
 {
-  "name": "pa",
+  "name": "cctr-cli",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.26.1",
-    "body-parser": "^1.19.2",
-    "cheerio": "^1.0.0-rc.10",
-    "express": "^4.17.3",
-    "form-data": "^4.0.0",
-    "pako": "^2.0.4",
-    "request": "^2.88.2"
+    "axios": "^0.27.2",
+    "chalk": "^4.1.2",
+    "figlet": "^1.5.2",
+    "inquirer": "^8.2.4",
+    "node-jsencrypt": "^1.0.0"
   }
 }
