@@ -1,9 +1,10 @@
 function build(data) {
   var html = "";
   data.forEach((element, index) => {
-    html += "<div class='item'><div class='num'>" + (index + 1) + `.${element.questiontypename}</div>`;
+    const { questiontypename } = element;
+    html += "<div class='item'><div class='num'>" + (index + 1) + `.${questiontypename}</div>`;
     html += "<div class='question' style=''>" + unzip(element.subjecthtml_svg).replace(/\<(\/?)p/g, `\<$1div`) + "</div>";
-    if (element.questiontypename.includes("选")) {
+    if (questiontypename.includes("选")) {
       html += "<div class='answer' style='display:flex;'>";
       element.options.forEach((item, index) => {
         html += `&nbsp;&#${65 + index};.&nbsp;`;
@@ -14,7 +15,7 @@ function build(data) {
         }
       });
       html += "</div>";
-    } else if (element.questiontypename.includes("填空")) {
+    } else if (questiontypename.includes("填空") || questiontypename.includes("运行结果")) {
       html += "<div class='answer' style='display:flex;'>";
       element.options.forEach((item, index) => {
         html += `&nbsp;&nbsp;&nbsp;&nbsp;`;

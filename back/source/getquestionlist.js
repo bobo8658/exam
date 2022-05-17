@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 const myaxios = require("./myaxios");
 const { getItem, setItem } = require("./utils");
-// const fs = require("fs");
+const openserver = require("./server");
 
 const setinputlist = ({ name, choices, message }) => {
   return inquirer.prompt({
@@ -94,6 +94,7 @@ const getStudentPractiseQuestionList = (fullData) => {
       return recursion(pageindex + 1, splitArrayDate);
     }
     setItem("./front/list.json", JSON.stringify(allquestionlist));
+    openserver();
   };
   return recursion();
 };
