@@ -65,6 +65,7 @@ const getStudentPractiseQuestionList = (fullData) => {
   const { courseid, practiseid, id: studentpractiseid, teacherid } = fullData;
   let { questioncount } = fullData;
   let allquestionlist = [];
+  let practisetype = 0
   const recursion = async (pageindex = 1, split = []) => {
     let overcount = questioncount > 500 ? ((questioncount -= 500), true) : null;
     const data = {
@@ -76,7 +77,7 @@ const getStudentPractiseQuestionList = (fullData) => {
       // pagecount: 15, // datas.questioncount,
       pagecount: overcount ? 500 : questioncount,
       pageindex,
-      practisetype: 0,
+      practisetype,
       statenum: 0,
       id: split[pageindex - 1] || "",
       studentpractisequestioncount: questioncount,
@@ -92,6 +93,9 @@ const getStudentPractiseQuestionList = (fullData) => {
     allquestionlist = [...allquestionlist, ...questionlist];
     if (pageindex < splitArrayDate.length) {
       return recursion(pageindex + 1, splitArrayDate);
+    } else if (practisetype === 0){
+      practisetype = 1
+      return recursion(1, splitArrayDate);
     }
     setItem("./front/list.json", JSON.stringify(allquestionlist));
     openserver();
