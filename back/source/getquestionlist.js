@@ -63,39 +63,37 @@ const changePractise = async (practiselist) => {
 const getStudentPractiseQuestionList = (fullData) => {
   const key = token();
   const { courseid, practiseid, id: studentpractiseid, teacherid } = fullData;
-  let { questioncount } = fullData;
   let allquestionlist = [];
-  let practisetype = 0
+  let practisetype = 0;
   const recursion = async (pageindex = 1, split = []) => {
-    let overcount = questioncount > 500 ? ((questioncount -= 500), true) : null;
     const data = {
       key,
       courseid,
       practiseid,
       studentpractiseid,
       teacherid,
-      // pagecount: 15, // datas.questioncount,
-      pagecount: overcount ? 500 : questioncount,
+      pagecount: 500,
       pageindex,
       practisetype,
       statenum: 0,
       id: split[pageindex - 1] || "",
-      studentpractisequestioncount: questioncount,
+      studentpractisequestioncount: 500,
     };
     const { questionlist, split: splitArrayDate = split } = await myaxios({
       method: "post",
       url: `index.php?act=studentpracticeapi&op=getStudentPractiseQuestionList`,
       data,
     }).then((response) => {
-      const { questionlist, split } = response.datas;
-      return { questionlist, split };
+      return response.datas;
+      // const { questionlist, split } = response.datas;
+      // return { questionlist, split };
     });
     allquestionlist = [...allquestionlist, ...questionlist];
     if (pageindex < splitArrayDate.length) {
       return recursion(pageindex + 1, splitArrayDate);
-    } else if (practisetype === 0){
-      practisetype = 1
-      return recursion(1, splitArrayDate);
+    } else if (practisetype === 0) {
+      practisetype = 1;
+      return recursion(1, []);
     }
     setItem("./front/list.json", JSON.stringify(allquestionlist));
     openserver();
