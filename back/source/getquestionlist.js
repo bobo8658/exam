@@ -89,7 +89,7 @@ const getStudentPractiseQuestionList = (fullData) => {
       // return { questionlist, split };
     });
     allquestionlist = [...allquestionlist, ...questionlist];
-    if (pageindex < splitArrayDate.length) {
+    if (pageindex < splitArrayDate?.length) {
       return recursion(pageindex + 1, splitArrayDate);
     } else if (practisetype === 0) {
       practisetype = 1;
