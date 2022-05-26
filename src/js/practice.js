@@ -110,7 +110,22 @@ $(function () {
 						}
 					}).then(r => {
 						list.push(...r.datas.questionlist)
-						localStorage.setItem('list', JSON.stringify(list))
+						var reList = []
+						const funRreList = () => {
+							let questionNameType = list[0].questiontypename
+							list.forEach((element, index) => {
+								if (element.questiontypename === questionNameType) {
+									reList.push(list[i])
+									list.splice(index, 1)
+									index--
+								}
+							})
+							if (list.length > 0) {
+								return funRreList()
+							}
+						}
+						funRreList()
+						localStorage.setItem('list', JSON.stringify(reList))
 						location.href = './subject.html'
 					})
 
